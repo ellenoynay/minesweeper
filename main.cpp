@@ -13,7 +13,6 @@ int main() {
                 window.close();
         }
         // Anything being changed can go from here *
-
         
         window.clear();
 
@@ -26,7 +25,7 @@ int main() {
     return 0;
 }
 
-// clang++ -std=c++17 main.cpp -o sfml-app \
+// clang++ -std=c++17 main.cpp -o builds/sfml-app \
 //  -I/opt/homebrew/opt/sfml/include \
 //  -L/opt/homebrew/opt/sfml/lib \
 //  -lsfml-graphics -lsfml-window -lsfml-system
