@@ -9,6 +9,7 @@ public:
     Cell(const sf::Vector2f &pos);
 
     void SetColour(sf::Color col);
+    void Reveal();
     void Render(sf::RenderWindow &window) const;
 private:
     Square s_;

@@ -5,6 +5,8 @@ Square::Square(const sf::Vector2f &pos) {
     s.setSize(sf::Vector2f(20, 20));
     s.setPosition(pos);
     s.setFillColor(sf::Color(175, 175, 175, 255));
+    s.setOutlineColor(sf::Color::Red);
+    s.setOutlineThickness(1.0);
     std::cout << "Square constructor called at " << pos.x << ", " << pos.y << ".\n";
 }
 
