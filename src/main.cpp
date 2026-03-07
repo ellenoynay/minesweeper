@@ -9,10 +9,10 @@ const int ROWS = 22;
 const int COLS = 22;
 const int WIDTH = 20;
 
-sf::Vector2f getGridIndex(const sf::Vector2f &mousePos) {
-    int row;
-    int col;
-}
+// sf::Vector2f getGridIndex(const sf::Vector2f &mousePos) {
+//     int row;
+//     int col;
+// }
 
 
 int main() {

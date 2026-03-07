@@ -13,7 +13,7 @@ public:
     void Render(sf::RenderWindow &window) const;
 private:
     Square s_;
-    bool isBomb_ = true;
+    // bool isBomb_ = true;
     bool isRevealed_ = false;
 };
 

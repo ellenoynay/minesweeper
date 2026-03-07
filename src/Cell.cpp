@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Cell.hpp"
 
-Cell::Cell(const sf::Vector2f &pos) : s_(pos), isBomb_(false), isRevealed_(false) {
+Cell::Cell(const sf::Vector2f &pos) : s_(pos), isRevealed_(false) {
     std::cout << "Cell constructor called at " << pos.x << ", " << pos.y << ".\n";
 }
 
