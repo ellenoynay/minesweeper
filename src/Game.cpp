@@ -5,13 +5,10 @@
 Game::Game() : window(sf::VideoMode({480, 640}), "Minesweeper") {
     window.setFramerateLimit(60);
     // set up grid
-    for (int i = 1; i <= COLS; i++) {
-        std::vector<Cell> col;
-        for (int j = 1; j <= ROWS; j++) {
-            Cell c({(float)i * CELL_WIDTH, (float)j * CELL_WIDTH});
-            col.push_back(c);
+    for (int i = 0; i < COLS; i++) {
+        for (int j = 0; j < ROWS; j++) {
+            cells[i][j] = Cell({(float)i * CELL_WIDTH, (float)j * CELL_WIDTH});
         }
-        cells.push_back(col);
     }
 }
 
@@ -31,8 +28,8 @@ void Game::setup() {
     // Test Cell (in constructor)
     
     
-    std::cout << cells.size() << std::endl;
-    std::cout << cells[0].size() << std::endl;
+    std::cout << "Number of columns: " << cells.size() << std::endl;
+    std::cout << "Number of rows: " << cells[0].size() << std::endl;
 }
 
 void Game::run() {
@@ -43,13 +40,13 @@ void Game::run() {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
                 window.close();
         }
-        // Anything being changed can go from here *
+        // Anything being changed can go from here [
 
         update();
         
         window.clear();
 
-        // * To here (before any renders)
+        // ] To here (before any renders)
         // Anything being rendered must go here
 
         draw();

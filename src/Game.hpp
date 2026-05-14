@@ -19,7 +19,7 @@ public:
     
 private:
    sf::RenderWindow window;
-   std::vector<std::vector<Cell>> cells;
+   std::array<std::array<Cell, ROWS>, COLS> cells;
 };
 
 #endif
