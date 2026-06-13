@@ -11,7 +11,7 @@ public:
     static inline constexpr int COLS = 22;
     static inline constexpr int NUM_CELLS = ROWS * COLS;
     static inline constexpr int CELL_WIDTH = 20;
-    static inline constexpr int PADDING = 0;
+    static inline constexpr int PADDING = 20;
 
     Game();
 
@@ -19,6 +19,8 @@ public:
     void run();
     void update();
     void draw();
+
+    int getCellIndex(const sf::Vector2f& mousePos) const;
     
 private:
    sf::RenderWindow window;

@@ -4,34 +4,19 @@
 
 Game::Game() : window(sf::VideoMode({480, 640}), "Minesweeper") {
     window.setFramerateLimit(60);
-    // set up grid
     cells.reserve(ROWS * COLS);
     int rows, cols;
     for (int i = 0; i < NUM_CELLS; i++) {
         rows = i / COLS;
         cols = i % COLS;
-        cells.push_back(Cell({(float)rows * CELL_WIDTH + PADDING, (float)cols * CELL_WIDTH + PADDING}));
+        cells.push_back(Cell({(float)cols * CELL_WIDTH + PADDING, (float)rows * CELL_WIDTH + PADDING}));
     }
 }
 
 void Game::setup() {
-    // GLOBALS
-    // const int ROWS = 22;
-    // const int COLS = 22;
-    // const int WIDTH = 20;
-
-    // sf::Vector2f getGridIndex(const sf::Vector2f &mousePos) {
-    //     int row;
-    //     int col;
-    // }
-
-    // Vector of cells is within header
-
-    // Test Cell (in constructor)
-    
-    
     std::cout << "Number of columns: " << cells.size() / COLS << std::endl;
     std::cout << "Number of rows: " << cells.size() / ROWS << std::endl;
+    std::cout << "Number of cells: " << cells.size() << std::endl;
 }
 
 void Game::run() {
@@ -58,9 +43,10 @@ void Game::run() {
 }
 
 void Game::update() {
-    // Testing reveal member function
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-        for (int i = 0; i < NUM_CELLS; i++)
+        sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        int i = getCellIndex(mousePos);
+        if (i != -1)
             cells.at(i).Reveal();
     }    
 }
@@ -68,4 +54,11 @@ void Game::update() {
 void Game::draw() {
     for (int i = 0; i < NUM_CELLS; i++)
         cells.at(i).Render(window);
+}
+
+int Game::getCellIndex(const sf::Vector2f& mousePos) const {
+    int col = (int)((mousePos.x - PADDING) / CELL_WIDTH);
+    int row = (int)((mousePos.y - PADDING) / CELL_WIDTH);
+    if (col < 0 || col >= COLS || row < 0 || row >= ROWS) return -1;
+    return row * COLS + col;
 }
