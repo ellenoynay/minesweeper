@@ -5,10 +5,12 @@
 Game::Game() : window(sf::VideoMode({480, 640}), "Minesweeper") {
     window.setFramerateLimit(60);
     // set up grid
-    for (int i = 0; i < COLS; i++) {
-        for (int j = 0; j < ROWS; j++) {
-            cells[i][j] = Cell({(float)i * CELL_WIDTH, (float)j * CELL_WIDTH});
-        }
+    cells.reserve(ROWS * COLS);
+    int rows, cols;
+    for (int i = 0; i < NUM_CELLS; i++) {
+        rows = i / COLS;
+        cols = i % COLS;
+        cells.push_back(Cell({(float)rows * CELL_WIDTH + PADDING, (float)cols * CELL_WIDTH + PADDING}));
     }
 }
 
@@ -28,8 +30,8 @@ void Game::setup() {
     // Test Cell (in constructor)
     
     
-    std::cout << "Number of columns: " << cells.size() << std::endl;
-    std::cout << "Number of rows: " << cells[0].size() << std::endl;
+    std::cout << "Number of columns: " << cells.size() / COLS << std::endl;
+    std::cout << "Number of rows: " << cells.size() / ROWS << std::endl;
 }
 
 void Game::run() {
@@ -58,18 +60,12 @@ void Game::run() {
 void Game::update() {
     // Testing reveal member function
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-        for (int i = 0; i < COLS; i++) {
-            for (int j = 0; j < ROWS; j++) {
-                cells[i][j].Reveal();
-            }
-        }
+        for (int i = 0; i < NUM_CELLS; i++)
+            cells.at(i).Reveal();
     }    
 }
 
 void Game::draw() {
-    for (int i = 0; i < COLS; i++) {
-        for (int j = 0; j < ROWS; j++) {
-            cells[i][j].Render(window);
-        }
-    }
+    for (int i = 0; i < NUM_CELLS; i++)
+        cells.at(i).Render(window);
 }
