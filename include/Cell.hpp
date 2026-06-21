@@ -6,6 +6,7 @@
 
 class Cell {
 public:
+    Cell();
     Cell(const sf::Vector2f &pos);
 
     void SetColour(sf::Color col);
