@@ -22,15 +22,27 @@ void Game::setup() {
 void Game::run() {
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()) {
-            if (event->is<sf::Event::Closed>())
+            if (event->is<sf::Event::Closed>()) {
                 window.close();
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
-                window.close();
+                break;
+            }
+            if (const auto* keyPress = event->getIf<sf::Event::KeyPressed>()) {
+                if (keyPress->code == sf::Keyboard::Key::Escape) {
+                    window.close();
+                    break;
+                } else if (keyPress->code == sf::Keyboard::Key::Space) {
+                    update();
+                }
+            } else if (const auto* mouseMoved = event->getIf<sf::Event::MouseMoved>()) {
+                ; // placeholder for hover functionality
+            } else if (event->is<sf::Event::MouseButtonPressed>()) {
+                ; // placeholder for mouse press functionality
+            } else if (const auto* mousePressed = event->getIf<sf::Event::MouseButtonReleased>()) {
+                update();
+            }
         }
         // Anything being changed can go from here [
 
-        update();
-        
         window.clear();
 
         // ] To here (before any renders)
@@ -43,12 +55,10 @@ void Game::run() {
 }
 
 void Game::update() {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-        sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-        int i = getCellIndex(mousePos);
-        if (i != -1)
-            cells.at(i).Reveal();
-    }    
+    sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    int i = getCellIndex(mousePos);
+    if (i != -1)
+        cells.at(i).Reveal();   
 }
 
 void Game::draw() {
